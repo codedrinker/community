@@ -1,4 +1,5 @@
 HELP.md
+community.vpp.*
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
