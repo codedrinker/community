@@ -15,7 +15,10 @@
 [Git](https://git-scm.com/download)  
 [Visual Paradigm](https://www.visual-paradigm.com)   
 [Flyway](https://flywaydb.org/getstarted/firststeps/maven)
-[Lombok](https://www.projectlombok.org)
+[Lombok](https://www.projectlombok.org)  
+[ctotree](https://www.octotree.io/)  
+[Table of content sidebar](https://chrome.google.com/webstore/detail/table-of-contents-sidebar/ohohkfheangmbedkgechjkmbepeikkej)  
+[One Tab](https://chrome.google.com/webstore/detail/chphlpgkkbolifaimnlloiipkdnihall)  
 
 ## 脚本
 ```sql
