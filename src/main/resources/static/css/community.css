@@ -16,6 +16,7 @@ body {
     width: 38px;
     height: 38px;
 }
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
@@ -24,4 +25,9 @@ body {
 
 .profile .section {
     margin-top: 15px;
+}
+
+.community-menu {
+    color: #999;
+    font-size: 13px;
 }
