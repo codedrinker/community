@@ -1,13 +1,7 @@
 package life.majiang.community.dto;
 
-import lombok.Data;
-
 /**
- * Created by codedrinker on 2019/5/30.
+ * Created by codedrinker on 2019/6/2.
  */
-@Data
 public class CommentDTO {
-    private Long parentId;
-    private String content;
-    private Integer type;
 }
