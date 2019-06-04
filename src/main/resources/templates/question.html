@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
@@ -56,38 +57,23 @@
                             <div th:text="${comment.content}"></div>
                             <div class="menu">
                                 <span class="glyphicon glyphicon-thumbs-up icon"></span>
-                                <span class="glyphicon glyphicon-comment icon" th:data-id="${comment.id}"
-                                      onclick="collapseComments(this)"></span>
+                                <span th:data-id="${comment.id}"
+                                      onclick="collapseComments(this)" class="comment-icon">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    <span th:text="${comment.commentCount}"></span>
+                                </span>
                                 <span class="pull-right"
                                       th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
                             </div>
                             <!--二级评论-->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments"
                                  th:id="${'comment-'+comment.id}">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
-                                     th:each="comment : ${comments}">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object img-rounded"
-                                                     th:src="${comment.user.avatarUrl}">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">
-                                                <span th:text="${comment.user.name}"></span>
-                                            </h5>
-                                            <div th:text="${comment.content}"></div>
-                                            <div class="menu">
-                                                <span class="pull-right"
-                                                      th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" placeholder="评论一下……" th:id="${'input-'+comment.id}">
-                                    <button type="button" class="btn btn-success pull-right" onclick="comment(this)" th:data-id="${comment.id}">评论</button>
+                                    <input type="text" class="form-control" placeholder="评论一下……"
+                                           th:id="${'input-'+comment.id}">
+                                    <button type="button" class="btn btn-success pull-right" onclick="comment(this)"
+                                            th:data-id="${comment.id}">评论
+                                    </button>
                                 </div>
                             </div>
                         </div>
