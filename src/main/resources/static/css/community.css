@@ -51,6 +51,16 @@ body {
     width: 100%;
 }
 
+.publish-tag-tab {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.publish-tag-tab .label-info {
+    margin-right: 10px;
+}
+
 .community-menu {
     display: block;
     color: #999;

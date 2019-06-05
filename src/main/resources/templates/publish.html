@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -23,7 +24,8 @@
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）:</label>
                     <input type="text" class="form-control" th:value="${title}" id="title" name="title"
-                           placeholder="问题标题……">
+                           placeholder="问题标题……"
+                           autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充 (必填，请参照右侧提示):</label>
@@ -34,7 +36,30 @@
                 <div class="form-group">
                     <label for="tag">添加标签:</label>
                     <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
-                           placeholder="输入标签，以，号分隔">
+                           autocomplete="off"
+                           placeholder="输入标签，以，号分隔"
+                           onclick="showSelectTag()">
+                    <div id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" th:each="selectCategory: ${tags}">
+                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane" th:id="${selectCategory.categoryName}"
+                                 th:each="selectCategory: ${tags}">
+                                <span>
+                                    <span class="label label-info" th:each="selectTag: ${selectCategory.tags}">
+                                    <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
+                                          th:data-tag="${selectTag}"
+                                          th:text="${selectTag}">
+                                    </span>
+                                </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="container-fluid main ">
