@@ -25,6 +25,7 @@
                     <li th:if="${session.user != null}">
                         <a href="/publish">提问</a>
                     </li>
+                    <li><a href="/profile/replies">通知 <span class="badge">42</span></a></li>
                     <li class="dropdown" th:if="${session.user != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
