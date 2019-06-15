@@ -94,7 +94,7 @@
                 <a href="/profile/replies"
                    th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
                     最新回复
-                    <span class="badge" th:text="${unreadCount}"></span>
+                    <span class="badge" th:text="${session.unreadCount}"></span>
                 </a>
             </div>
         </div>
