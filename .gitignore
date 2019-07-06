@@ -2,7 +2,7 @@ HELP.md
 community.vpp.*
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-
+logs/
 ### STS ###
 .apt_generated
 .classpath
