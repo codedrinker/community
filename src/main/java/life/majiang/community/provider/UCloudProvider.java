@@ -9,6 +9,7 @@ import cn.ucloud.ufile.exception.UfileClientException;
 import cn.ucloud.ufile.exception.UfileServerException;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
  * Created by codedrinker on 2019/6/28.
  */
 @Service
+@Slf4j
 public class UCloudProvider {
     @Value("${ucloud.ufile.public-key}")
     private String publicKey;
@@ -49,7 +51,6 @@ public class UCloudProvider {
         try {
             ObjectAuthorization objectAuthorization = new UfileObjectLocalAuthorization(publicKey, privateKey);
             ObjectConfig config = new ObjectConfig(region, suffix);
-
             PutObjectResultBean response = UfileClient.object(objectAuthorization, config)
                     .putObject(fileStream, mimeType)
                     .nameAs(generatedFileName)
@@ -63,13 +64,14 @@ public class UCloudProvider {
                         .createUrl();
                 return url;
             } else {
+                log.error("upload error,{}", response);
                 throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
             }
         } catch (UfileClientException e) {
-            e.printStackTrace();
+            log.error("upload error,{}", fileName, e);
             throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         } catch (UfileServerException e) {
-            e.printStackTrace();
+            log.error("upload error,{}", fileName, e);
             throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         }
     }

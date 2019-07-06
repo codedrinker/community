@@ -50,7 +50,6 @@ public class CommentController {
         return ResultDTO.okOf();
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     public ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id") Long id) {
