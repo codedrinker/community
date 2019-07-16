@@ -1,2 +1,2 @@
-ALTER TABLE QUESTION ALTER COLUMN ID BIGINT DEFAULT NOT NULL;
-ALTER TABLE `USER` ALTER COLUMN ID BIGINT DEFAULT NOT NULL;
+alter table question alter column id bigint default not null;
+alter table `user` alter column id bigint default not null;
