@@ -1,0 +1,17 @@
+cd ~/App/community/
+git pull
+mvn clean compile flyway:migrate -Pproduction
+mvn clean compile -DskipTests package
+pid=$(ps aux | grep "community" | grep -v grep | awk '{print $2}')
+echo "kill -9 $pid"
+kill -9 $pid
+STATUS=$?
+if [ $STATUS -eq 0 ]
+then
+	echo "Kill previous process successfully."
+	echo "Begin restart community"
+	nohup java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &
+	echo "Community restart successfully."
+else
+	echo "Kill previous process failed."
+fi
