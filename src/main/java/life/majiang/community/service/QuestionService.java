@@ -37,7 +37,7 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PaginationDTO list(String search,Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
 
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
@@ -153,6 +153,16 @@ public class QuestionService {
             questionMapper.insert(question);
         } else {
             // 更新
+
+            Question dbQuestion = questionMapper.selectByPrimaryKey(question.getId());
+            if (dbQuestion == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
+
+            if (dbQuestion.getCreator().longValue() != question.getCreator().longValue()) {
+                throw new CustomizeException(CustomizeErrorCode.INVALID_OPERATION);
+            }
+
             Question updateQuestion = new Question();
             updateQuestion.setGmtModified(System.currentTimeMillis());
             updateQuestion.setTitle(question.getTitle());
