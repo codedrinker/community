@@ -37,6 +37,7 @@
                 and tag regexp #{tag}
             </if>
         </where>
+        order by gmt_create desc limit 20
     </select>
 
     <select id="countBySearch" parameterType="life.majiang.community.dto.QuestionQueryDTO"
