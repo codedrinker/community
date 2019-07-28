@@ -7,6 +7,10 @@ body {
     margin: 30px;
 }
 
+.side {
+    margin: 5px 0;
+}
+
 .btn-publish {
     float: right;
     margin-bottom: 15px;
