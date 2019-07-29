@@ -14,6 +14,7 @@
                 </button>
                 <a class="navbar-brand" href="/">码匠社区</a>
             </div>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left" action="/" method="get">
                     <div class="form-group">
@@ -21,6 +22,11 @@
                     </div>
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
+                <ul class="nav navbar-nav">
+                    <li><a href="https://detail.youzan.com/show/goods/newest?alias=2xj0uxwujrwg6" target="_blank"
+                           onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'BOOK_STORE','transport_type': 'NAV'})">码匠书店</a>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:if="${session.user != null}">
                         <a href="/publish">提问</a>
