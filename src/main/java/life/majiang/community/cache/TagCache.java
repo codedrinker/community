@@ -50,4 +50,9 @@ public class TagCache {
         String invalid = Arrays.stream(split).filter(t -> StringUtils.isBlank(t) || !tagList.contains(t)).collect(Collectors.joining(","));
         return invalid;
     }
+
+    public static void main(String[] args) {
+        int i = (5 - 1) >>> 1;
+        System.out.println(i);
+    }
 }

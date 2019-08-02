@@ -47,6 +47,9 @@
             <if test="search != null and search != ''">
                 and title regexp #{search}
             </if>
+            <if test="tag != null and tag != ''">
+                and tag regexp #{tag}
+            </if>
         </where>
     </select>
 
@@ -56,6 +59,9 @@
         <where>
             <if test="search != null and search != ''">
                 and title regexp #{search}
+            </if>
+            <if test="tag != null and tag != ''">
+                and tag regexp #{tag}
             </if>
         </where>
         order by gmt_create desc limit #{page},#{size}
