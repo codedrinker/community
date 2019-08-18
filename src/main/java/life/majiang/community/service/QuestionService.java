@@ -45,7 +45,7 @@ public class QuestionService {
             search = Arrays
                     .stream(tags)
                     .filter(StringUtils::isNotBlank)
-                    .map(t -> t.replace("+", "").replace("*", ""))
+                    .map(t -> t.replace("+", "").replace("*", "").replace("?", ""))
                     .filter(StringUtils::isNotBlank)
                     .collect(Collectors.joining("|"));
         }
@@ -57,7 +57,7 @@ public class QuestionService {
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
         if (StringUtils.isNotBlank(tag)) {
-            tag = tag.replace("+", "").replace("*", "");
+            tag = tag.replace("+", "").replace("*", "").replace("?", "");
             questionQueryDTO.setTag(tag);
         }
 
@@ -217,7 +217,7 @@ public class QuestionService {
         String regexpTag = Arrays
                 .stream(tags)
                 .filter(StringUtils::isNotBlank)
-                .map(t -> t.replace("+", "").replace("*", ""))
+                .map(t -> t.replace("+", "").replace("*", "").replace("?", ""))
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.joining("|"));
         Question question = new Question();
