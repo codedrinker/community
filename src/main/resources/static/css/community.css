@@ -140,3 +140,7 @@ body {
     text-align: center;
     color: #666;;
 }
+
+.red {
+    color: red !important;
+}

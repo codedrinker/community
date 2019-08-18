@@ -3,6 +3,7 @@ package life.majiang.community.service;
 import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.dto.QuestionQueryDTO;
+import life.majiang.community.enums.SortEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.QuestionExtMapper;
@@ -37,7 +38,7 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PaginationDTO list(String search, String tag, Integer page, Integer size) {
+    public PaginationDTO list(String search, String tag, String sort, Integer page, Integer size) {
 
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
@@ -55,9 +56,23 @@ public class QuestionService {
 
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
-        if(StringUtils.isNotBlank(tag)){
+        if (StringUtils.isNotBlank(tag)) {
             tag = tag.replace("+", "").replace("*", "");
             questionQueryDTO.setTag(tag);
+        }
+
+        for (SortEnum sortEnum : SortEnum.values()) {
+            if (sortEnum.name().toLowerCase().equals(sort)) {
+                questionQueryDTO.setSort(sort);
+
+                if (sortEnum == SortEnum.HOT7) {
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7);
+                }
+                if (sortEnum == SortEnum.HOT30) {
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30);
+                }
+                break;
+            }
         }
 
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
@@ -200,11 +215,11 @@ public class QuestionService {
         }
         String[] tags = StringUtils.split(queryDTO.getTag(), ",");
         String regexpTag = Arrays
-                    .stream(tags)
-                    .filter(StringUtils::isNotBlank)
-                    .map(t -> t.replace("+", "").replace("*", ""))
-                    .filter(StringUtils::isNotBlank)
-                    .collect(Collectors.joining("|"));
+                .stream(tags)
+                .filter(StringUtils::isNotBlank)
+                .map(t -> t.replace("+", "").replace("*", ""))
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining("|"));
         Question question = new Question();
         question.setId(queryDTO.getId());
         question.setTag(regexpTag);

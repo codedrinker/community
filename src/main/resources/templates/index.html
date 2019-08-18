@@ -18,8 +18,24 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h2>
-            <hr>
+            <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h3>
+            <ul class="nav nav-tabs">
+                <li role="presentation" th:class="${sort == 'new' || sort == '' ? 'active':''}">
+                    <a th:href="@{/(sort='new')}">最新</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot30' ? 'active':''}">
+                    <a th:href="@{/(sort='hot30')}">30天最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot7' ? 'active':''}">
+                    <a th:href="@{/(sort='hot7')}">7天最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'hot' ? 'active':''}">
+                    <a th:href="@{/(sort='hot')}">最热</a>
+                </li>
+                <li role="presentation" th:class="${sort == 'no' ? 'active':''}">
+                    <a th:href="@{/(sort='no')}" class="red">消灭零回复</a>
+                </li>
+            </ul>
 
             <div class="media" th:each="question : ${pagination.data}">
                 <div class="media-left">
@@ -40,27 +56,30 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${pagination.showFirstPage}">
-                        <a th:href="@{/(page=1,search=${search},tag=${tag})}" aria-label="Previous">
+                        <a th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
                     <li th:if="${pagination.showPrevious}">
-                        <a th:href="@{/(page=${pagination.page - 1},search=${search},tag=${tag})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagination.page - 1},search=${search},tag=${tag},sort=${sort})}"
+                           aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <li th:each="page : ${pagination.pages}" th:class="${pagination.page == page}? 'active' : ''">
-                        <a th:href="@{/(page=${page},search=${search},tag=${tag})}" th:text="${page}"></a>
+                        <a th:href="@{/(page=${page},search=${search},tag=${tag},sort=${sort})}" th:text="${page}"></a>
                     </li>
 
                     <li th:if="${pagination.showNext}">
-                        <a th:href="@{/(page=${pagination.page +1 },search=${search},tag=${tag})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagination.page +1 },search=${search},tag=${tag},sort=${sort})}"
+                           aria-label="Previous">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li th:if="${pagination.showEndPage}">
-                        <a th:href="@{/(page=${pagination.totalPage},search=${search},tag=${tag})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagination.totalPage},search=${search},tag=${tag},sort=${sort})}"
+                           aria-label="Previous">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
@@ -75,7 +94,7 @@
                 <h4>热门标签</h4>
                 <ul class="question-related">
                     <li th:each="tag : ${tags}">
-                        <a th:href="@{/(page=1,search=${search},tag=${tag})}" th:text="${tag}"></a>
+                        <a th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}" th:text="${tag}"></a>
                     </li>
                 </ul>
             </div>
