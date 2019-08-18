@@ -79,6 +79,9 @@
         <if test="sort == null or sort == ''">
             order by gmt_create desc
         </if>
+        <if test="sort != null and sort != '' and sort == 'new'">
+            order by gmt_create desc
+        </if>
         <if test="sort != null and sort != '' and sort == 'no'">
             order by gmt_create desc
         </if>
