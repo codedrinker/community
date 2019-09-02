@@ -38,6 +38,9 @@ public class SessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //设置 context 级别的属性
         request.getServletContext().setAttribute("redirectUri", redirectUri);
+        // 没有登录的时候也可以查看导航
+        HttpSession session = request.getSession();
+        session.setAttribute("navs", navService.list());
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0)
             for (Cookie cookie : cookies) {
@@ -48,11 +51,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                             .andTokenEqualTo(token);
                     List<User> users = userMapper.selectByExample(userExample);
                     if (users.size() != 0) {
-                        HttpSession session = request.getSession();
                         session.setAttribute("user", users.get(0));
                         Long unreadCount = notificationService.unreadCount(users.get(0).getId());
                         session.setAttribute("unreadCount", unreadCount);
-                        session.setAttribute("navs", navService.list());
                     }
                     break;
                 }
