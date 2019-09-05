@@ -10,13 +10,23 @@
         <h4>码问官方公众号</h4>
         <img class="img-thumbnail question-wechat" src="/images/official-account.png">
     </div>
-    <!--超级CDN-->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side">
-        <a href="https://www.ucloud.cn/site/active/cdn-ufile.html?ytag=javacdn" target="_blank"
-           onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'UCDN','transport_type': 'SIDE'})">
-            <img class="img-thumbnail question-wechat" src="/images/ucdn.png">
+    <script>
+        function clickSide(label) {
+            gtag('event', 'click', {
+                'event_category': 'LINK',
+                'event_label': label,
+                'transport_type': 'SIDE'
+            })
+        }
+    </script>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"
+         th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('SIDE')}">
+        <a th:href="${ad.url}" th:onclick="clickSide([[${ad.title}]])"
+           target="_blank">
+            <img class="img-thumbnail question-wechat" th:src="${ad.image}">
         </a>
     </div>
+
 </div>
 </body>
 </html>

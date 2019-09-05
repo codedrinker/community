@@ -16,13 +16,13 @@ public class AdService {
     @Autowired
     private AdMapper adMapper;
 
-    public List<Ad> list() {
+    public List<Ad> list(String pos) {
         AdExample navExample = new AdExample();
         navExample.createCriteria()
                 .andStatusEqualTo(1)
+                .andPosEqualTo(pos)
                 .andGmtStartLessThan(System.currentTimeMillis())
                 .andGmtEndGreaterThan(System.currentTimeMillis());
-        //navExample.setOrderByClause("priority desc");
         return adMapper.selectByExample(navExample);
     }
 }

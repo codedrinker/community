@@ -22,6 +22,12 @@
             </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                     th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('HEADER')}">
+                    <a th:href="${ad.url}" th:text="${ad.title}" target="_blank"
+                       style="color: #A00;font-weight: bold;"></a>
+                </div>
+
                 <!--内容-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
                     <textarea style="display:none;" th:text="${question.description}"></textarea>
@@ -31,6 +37,12 @@
                         editormd.markdownToHTML("question-view", {});
                     });
                 </script>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                     th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('FOOTER')}">
+                    <a th:href="${ad.url}" th:text="${ad.title}" target="_blank"
+                       style="color: #A00;font-weight: bold;"></a>
+                </div>
 
                 <!--标签-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

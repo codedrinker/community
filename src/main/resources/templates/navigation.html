@@ -32,7 +32,7 @@
                             })
                         }
                     </script>
-                    <li th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('ads')}">
+                    <li th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('NAV')}">
                         <a th:href="${ad.url}" th:text="${ad.title}" th:onclick="clickNav([[${ad.title}]])"
                            target="_blank"></a>
                     </li>
