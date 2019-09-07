@@ -5,28 +5,28 @@
 <body>
 
 <div th:fragment="side">
-    <!--码问官方公众号-->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side">
-        <h4>码问官方公众号</h4>
-        <img class="img-thumbnail question-wechat" src="/images/official-account.png">
-    </div>
-    <script>
-        function clickSide(label) {
-            gtag('event', 'click', {
-                'event_category': 'LINK',
-                'event_label': label,
-                'transport_type': 'SIDE'
-            })
-        }
-    </script>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"
+         th:if="${#lists.size(#httpServletRequest.getServletContext().getAttribute('SIDE')) != 0}"
          th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('SIDE')}">
         <a th:href="${ad.url}" th:onclick="clickSide([[${ad.title}]])"
            target="_blank">
             <img class="img-thumbnail question-wechat" th:src="${ad.image}">
         </a>
     </div>
-
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"
+         th:if="${#lists.size(#httpServletRequest.getServletContext().getAttribute('SIDE')) == 0}">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧边栏广告位 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9804684553882114"
+             data-ad-slot="2615744269"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 </div>
 </body>
 </html>
