@@ -22,11 +22,12 @@
             </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ad-header"
                      th:if="${!#lists.isEmpty(#httpServletRequest.getServletContext().getAttribute('HEADER'))}"
                      th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('HEADER')}">
                     <a th:href="${ad.url}" th:text="${ad.title}" target="_blank"
                        style="color: #A00;font-weight: bold;"></a>
+                    <img src="/images/hot.png"/>
                 </div>
 
                 <!--内容-->

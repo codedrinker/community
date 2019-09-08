@@ -11,6 +11,10 @@ body {
     margin: 5px 0;
 }
 
+.ad-header {
+    padding-left: 20px;
+}
+
 .community-tag:hover {
     background-color: #339dff;
     color: #fff !important;
