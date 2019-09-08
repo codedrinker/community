@@ -5,6 +5,7 @@
 <body>
 
 <div th:fragment="side">
+    <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"
          th:if="${#lists.size(#httpServletRequest.getServletContext().getAttribute('SIDE')) != 0}"
          th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('SIDE')}">

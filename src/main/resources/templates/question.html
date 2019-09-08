@@ -63,9 +63,9 @@
                 <!--标签-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <span class="label label-info question-tag" th:each="tag : ${question.tag.split(',')}">
-                        <span class="glyphicon glyphicon-tags"></span>
-                        <span class="label label-info" th:text="${tag}"></span>
+                    <span class="question-tag" th:each="tag : ${question.tag.split(',')}">
+                        <a th:href="@{/(page=1,tag=${tag})}"
+                           th:text="${tag}" class="community-tag"></a>
                     </span>
                 </div>
 
