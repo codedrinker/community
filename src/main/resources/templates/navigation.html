@@ -23,11 +23,18 @@
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
                 <ul class="nav navbar-nav">
-                    <li><a href="https://detail.youzan.com/show/goods/newest?alias=2xj0uxwujrwg6" target="_blank"
-                           onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'BOOK_STORE','transport_type': 'NAV'})">码匠书店</a>
-                    </li>
-                    <li><a href="http://www.mawen.co/question/92" target="_blank"
-                           onclick="gtag('event', 'click', {'event_category': 'LINK','event_label': 'WEB','transport_type': 'NAV'})">前端面试题</a>
+                    <script>
+                        function clickNav(label) {
+                            gtag('event', 'click', {
+                                'event_category': 'LINK',
+                                'event_label': label,
+                                'transport_type': 'NAV'
+                            })
+                        }
+                    </script>
+                    <li th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('NAV')}">
+                        <a th:href="${ad.url}" th:text="${ad.title}" th:onclick="clickNav([[${ad.title}]])"
+                           target="_blank"></a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

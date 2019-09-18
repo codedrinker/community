@@ -87,17 +87,15 @@
             </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <div th:insert="~{side :: side}"></div>
+            <div th:insert="~{notice :: notice}"></div>
             <!--相关问题-->
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>热门标签</h4>
-                <ul class="question-related">
-                    <li th:each="tag : ${tags}">
-                        <a th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}" th:text="${tag}"></a>
-                    </li>
-                </ul>
+                <a th:each="tag : ${tags}" th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}"
+                   th:text="${tag}" class="community-tag"></a>
             </div>
+            <div th:insert="~{side :: side}"></div>
         </div>
     </div>
 </div>
