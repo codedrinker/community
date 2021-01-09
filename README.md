@@ -108,4 +108,4 @@ mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 |  微信公众号   |  个人微信   |
 | --- | --- |
 |  码匠笔记  |  xj17500 |
-|  ![](http://mawen-cdn.cn-bj.ufileos.com/wxdyh-qr.jpeg)   |   ![](http://mawen-cdn.cn-bj.ufileos.com/wx-qr.jpeg)  |
+|  ![](https://mawen-cdn.cn-bj.ufileos.com/wxdyh-qr.jpeg)   |   ![](https://mawen-cdn.cn-bj.ufileos.com/wx-qr.jpeg)  |
