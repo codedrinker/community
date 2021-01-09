@@ -19,4 +19,5 @@ public class QuestionDTO {
     private Integer commentCount;
     private Integer likeCount;
     private User user;
+    private Integer sticky;
 }

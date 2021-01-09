@@ -11,6 +11,7 @@
         <result column="VIEW_COUNT" jdbcType="INTEGER" property="viewCount"/>
         <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount"/>
         <result column="TAG" jdbcType="VARCHAR" property="tag"/>
+        <result column="STICKY" jdbcType="INTEGER" property="sticky" />
     </resultMap>
 
     <update id="incView" parameterType="life.majiang.community.model.Question">
@@ -77,16 +78,16 @@
             </if>
         </where>
         <if test="sort == null or sort == ''">
-            order by gmt_create desc
+            order by sticky desc, gmt_create desc
         </if>
         <if test="sort != null and sort != '' and sort == 'new'">
-            order by gmt_create desc
+            order by sticky desc, gmt_create desc
         </if>
         <if test="sort != null and sort != '' and sort == 'no'">
-            order by gmt_create desc
+            order by sticky desc, gmt_create desc
         </if>
         <if test="sort != null and sort != '' and (sort == 'hot' || sort == 'hot7' || sort == 'hot30')">
-            order by comment_count desc
+            order by sticky desc, comment_count desc
         </if>
         limit #{page},#{size}
     </select>
