@@ -1,5 +1,7 @@
 package life.majiang.community.controller;
 
+import com.github.developer.weapons.model.UFileResult;
+import com.github.developer.weapons.service.UFileService;
 import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.dto.GithubUser;
 import life.majiang.community.model.User;
@@ -39,6 +41,9 @@ public class AuthorizeController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UFileService uFileService;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
@@ -57,7 +62,13 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setAvatarUrl(githubUser.getAvatarUrl());
+            UFileResult fileResult = null;
+            try {
+                fileResult = uFileService.upload(githubUser.getAvatarUrl());
+                user.setAvatarUrl(fileResult.getFileUrl());
+            } catch (Exception e) {
+                user.setAvatarUrl(githubUser.getAvatarUrl());
+            }
             userService.createOrUpdate(user);
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
