@@ -77,7 +77,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.45</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
         <dependency>
             <groupId>com.github.developer.weapons</groupId>
             <artifactId>ucloud-spring-boot-starter</artifactId>

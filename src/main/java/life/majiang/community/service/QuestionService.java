@@ -1,5 +1,6 @@
 package life.majiang.community.service;
 
+import life.majiang.community.cache.QuestionCache;
 import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.dto.QuestionQueryDTO;
@@ -37,6 +38,9 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private QuestionCache questionCache;
 
     public PaginationDTO list(String search, String tag, String sort, Integer page, Integer size) {
 
@@ -105,7 +109,10 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-
+        List<QuestionDTO> stickies = questionCache.getStickies();
+        if (stickies != null && stickies.size() != 0) {
+            questionDTOList.addAll(0, stickies);
+        }
         paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }

@@ -2,7 +2,6 @@ package life.majiang.community.controller;
 
 import life.majiang.community.cache.HotTagCache;
 import life.majiang.community.dto.PaginationDTO;
-import life.majiang.community.service.NavService;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
