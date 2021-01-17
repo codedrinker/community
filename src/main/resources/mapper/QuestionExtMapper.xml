@@ -57,7 +57,7 @@
             <if test="time != null and time != ''">
                 and gmt_create > #{time}
             </if>
-            <if test="1 = 1">
+            <if test="1 == 1">
                 and sticky = 0
             </if>
         </where>
@@ -83,7 +83,7 @@
             <if test="time != null and time != ''">
                 and gmt_create > #{time}
             </if>
-            <if test="1 = 1">
+            <if test="1 == 1">
                 and sticky = 0
             </if>
         </where>
