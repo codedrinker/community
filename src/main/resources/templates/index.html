@@ -45,9 +45,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">
+                    <h5 class="media-heading">
                         <span style="color: #c74747" th:if="${question.sticky >= 1}">[置顶] </span><a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
-                    </h4>
+                    </h5>
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 • <span
                             th:text="${question.viewCount}"></span> 次浏览 • <span
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
