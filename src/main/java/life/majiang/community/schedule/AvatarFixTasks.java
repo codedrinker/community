@@ -1,10 +1,10 @@
 package life.majiang.community.schedule;
 
-import com.github.developer.weapons.model.UFileResult;
-import com.github.developer.weapons.service.UFileService;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.User;
 import life.majiang.community.model.UserExample;
+import life.majiang.community.provider.UFileResult;
+import life.majiang.community.provider.UFileService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
