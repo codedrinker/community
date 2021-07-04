@@ -1,11 +1,11 @@
 package life.majiang.community.controller;
 
-import com.github.developer.weapons.model.UFileResult;
-import com.github.developer.weapons.service.UFileService;
 import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.dto.GithubUser;
 import life.majiang.community.model.User;
 import life.majiang.community.provider.GithubProvider;
+import life.majiang.community.provider.UFileResult;
+import life.majiang.community.provider.UFileService;
 import life.majiang.community.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
