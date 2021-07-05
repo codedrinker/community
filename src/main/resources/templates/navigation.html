@@ -55,13 +55,37 @@
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">
-                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='7f316909bf70d1eaa2b2',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('redirectUri')},scope='user',state=1)}">登录</a>
+                        <!--                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='7f316909bf70d1eaa2b2',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('redirectUri')},scope='user',state=1)}">登录</a>-->
+                        <a href="#" data-toggle="modal" data-target="#myModal">登录</a>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="margin-top: 200px;width: 300px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">登录注册</h4>
+                </div>
+                <div class="modal-body" style="text-align:center">
+                    <a th:href="@{https://gitee.com/oauth/authorize(client_id='e542c33bb680ea612ce21b8efb397274eae34833553bc80bc9ff881425d1b883',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('giteeRedirectUri')},response_type=code)}">
+                        <img src="/images/gitee.png">
+                    </a>
+                    <a th:href="@{https://github.com/login/oauth/authorize(client_id='7f316909bf70d1eaa2b2',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('githubRedirectUri')},scope='user',state=1)}">
+                        <img src="/images/github.png">
+                    </a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -1,6 +1,7 @@
 package life.majiang.community.provider;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.provider.dto.GiteeUser;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,8 @@ public class GiteeProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            log.info("gitee response : {}", string);
+            JSONObject jsonObject = JSON.parseObject(string);
+            return jsonObject.getString("access_token");
         } catch (Exception e) {
             log.error("getAccessToken error,{}", accessTokenDTO, e);
         }

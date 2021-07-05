@@ -4,7 +4,9 @@ import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.provider.GiteeProvider;
 import life.majiang.community.provider.dto.GiteeUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GiteeUserStrategy implements UserStrategy {
     @Autowired
     private GiteeProvider giteeProvider;
