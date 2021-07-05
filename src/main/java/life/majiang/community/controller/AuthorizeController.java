@@ -64,6 +64,7 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(loginUserInfo.getName());
             user.setAccountId(String.valueOf(loginUserInfo.getId()));
+            user.setType(type);
             UFileResult fileResult = null;
             try {
                 fileResult = uFileService.upload(loginUserInfo.getAvatarUrl());
