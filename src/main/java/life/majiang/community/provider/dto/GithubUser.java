@@ -1,4 +1,4 @@
-package life.majiang.community.dto;
+package life.majiang.community.provider.dto;
 
 import lombok.Data;
 
