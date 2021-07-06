@@ -35,7 +35,7 @@ function comment2target(targetId, type, content) {
                     if (isAccepted) {
                         $('#myModal').modal({});
                         // window.open("https://github.com/login/oauth/authorize?client_id=7f316909bf70d1eaa2b2&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
-                        window.localStorage.setItem("closable", true);
+                        // window.localStorage.setItem("closable", true);
                     }
                 } else {
                     alert(response.message);
