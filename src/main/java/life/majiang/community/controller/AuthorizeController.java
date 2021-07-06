@@ -126,9 +126,13 @@ public class AuthorizeController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request,
                          HttpServletResponse response) {
-        request.getSession().removeAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            userService.invalidateToken(user);
+        }
+        request.getSession().invalidate();
         Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
+        cookie.setMaxAge(-1);
         response.addCookie(cookie);
         return "redirect:/";
     }

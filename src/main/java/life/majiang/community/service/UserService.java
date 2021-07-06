@@ -41,4 +41,13 @@ public class UserService {
             userMapper.updateByExampleSelective(updateUser, example);
         }
     }
+
+    public void invalidateToken(User user) {
+        User expiredUser = userMapper.selectByPrimaryKey(user.getId());
+        if (expiredUser != null) {
+            expiredUser.setToken("");
+            expiredUser.setGmtModified(System.currentTimeMillis());
+            userMapper.updateByPrimaryKey(expiredUser);
+        }
+    }
 }
