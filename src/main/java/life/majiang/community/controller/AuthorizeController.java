@@ -76,6 +76,7 @@ public class AuthorizeController {
             userService.createOrUpdate(user);
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
+            cookie.setPath("/");
             response.addCookie(cookie);
             return "redirect:/";
         } else {
@@ -126,13 +127,10 @@ public class AuthorizeController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request,
                          HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
-            userService.invalidateToken(user);
-        }
         request.getSession().invalidate();
         Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(-1);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
         response.addCookie(cookie);
         return "redirect:/";
     }
