@@ -57,10 +57,6 @@ public class AuthorizeController {
                               @RequestParam(name = "state", required = false) String state,
                               HttpServletRequest request,
                               HttpServletResponse response) {
-        request.getSession().removeAttribute("user");
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
         UserStrategy userStrategy = userStrategyFactory.getStrategy(type);
         LoginUserInfo loginUserInfo = userStrategy.getUser(code, state);
         if (loginUserInfo != null && loginUserInfo.getId() != null) {
@@ -78,7 +74,7 @@ public class AuthorizeController {
                 user.setAvatarUrl(loginUserInfo.getAvatarUrl());
             }
             userService.createOrUpdate(user);
-            cookie = new Cookie("token", token);
+            Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
             response.addCookie(cookie);
             return "redirect:/";
@@ -94,10 +90,6 @@ public class AuthorizeController {
                            @RequestParam(name = "state") String state,
                            HttpServletRequest request,
                            HttpServletResponse response) {
-        request.getSession().removeAttribute("user");
-        Cookie cookie = new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -120,7 +112,7 @@ public class AuthorizeController {
                 user.setAvatarUrl(githubUser.getAvatarUrl());
             }
             userService.createOrUpdate(user);
-            cookie = new Cookie("token", token);
+            Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
             response.addCookie(cookie);
             return "redirect:/";
