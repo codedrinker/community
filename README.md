@@ -10,10 +10,10 @@
 |  标题   |  链接   |
 | --- | --- |
 |  【Spring Boot 实战】论坛项目【第一季】   |  https://www.bilibili.com/video/BV1r4411r7au  |
-|  【Spring Boot 实战】热门话题【第二季】 |  https://www.bilibili.com/video/BV1Z4411f7RK  |
-|  【Spring Boot 实战】接入广告流量变现【第三季】  | https://www.bilibili.com/video/BV1L4411y7J9  |
-|  【Spring Boot 实战】Vue 零基础入门【第四季】  |   https://www.bilibili.com/video/BV1gE411R7YA |
-|  【Spring Boot 实战】Java 设计模式实战【第五季】  |   https://www.bilibili.com/video/BV1UK4y1M7PC |
+|  【Spring Boot 实战】热门话题，经典面试问题实战，TopN 问题【第二季】|  https://www.bilibili.com/video/BV1Z4411f7RK  |
+|  【Spring Boot 实战】接入广告流量变现(让你的网站益起来)【第三季】  | https://www.bilibili.com/video/BV1L4411y7J9  |
+|  【Spring Boot 实战】Vue 零基础入门(前后端分离的前置视频)【第四季】  |   https://www.bilibili.com/video/BV1gE411R7YA |
+|  【Spring Boot 实战】Java 设计模式实战(加薪的必修课)【第五季】  |   https://www.bilibili.com/video/BV1UK4y1M7PC |
 |  【Spring Boot 实战】快速搭建免费 HTTPS 服务  |   https://www.bilibili.com/video/BV1oJ411K7VT  |
 
 ## 本地运行手册
