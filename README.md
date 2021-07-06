@@ -42,7 +42,6 @@ spring.datasource.password=123
     <db.password>123</db.password>
 </properties>
 ```
-> 如果需要使用 MySQL 数据库，修改两处配置
 4. 运行打包命令，生成可执行 jar 文件
 ```sh
 mvn package -DskipTests
