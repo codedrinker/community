@@ -1,5 +1,6 @@
 package life.majiang.community.controller;
 
+import life.majiang.community.cache.QuestionRateLimiter;
 import life.majiang.community.cache.TagCache;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.model.Question;
@@ -85,6 +86,11 @@ public class PublishController {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
+            return "publish";
+        }
+
+        if (QuestionRateLimiter.reachLimit(user.getId())) {
+            model.addAttribute("error", "操作太快，请求被限制");
             return "publish";
         }
 

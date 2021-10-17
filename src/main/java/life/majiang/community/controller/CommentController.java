@@ -1,5 +1,6 @@
 package life.majiang.community.controller;
 
+import life.majiang.community.cache.QuestionRateLimiter;
 import life.majiang.community.dto.CommentCreateDTO;
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.dto.ResultDTO;
@@ -36,6 +37,10 @@ public class CommentController {
 
         if (commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())) {
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
+        }
+
+        if (QuestionRateLimiter.reachLimit(user.getId())) {
+            return ResultDTO.errorOf(CustomizeErrorCode.INVALID_OPERATION);
         }
 
         Comment comment = new Comment();
