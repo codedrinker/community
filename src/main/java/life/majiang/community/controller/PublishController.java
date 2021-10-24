@@ -6,6 +6,7 @@ import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by codedrinker on 2019/5/2.
  */
 @Controller
+@Slf4j
 public class PublishController {
 
     @Autowired
@@ -54,6 +56,7 @@ public class PublishController {
             @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
             Model model) {
+        log.info("referer:{}", request.getHeader("referer"));
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
