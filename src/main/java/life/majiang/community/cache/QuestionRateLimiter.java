@@ -38,7 +38,7 @@ public class QuestionRateLimiter {
             Integer limit = userLimiter.get(userId, () -> 0);
             userLimiter.put(userId, limit + 1);
             log.info("user : {} post count : {}", userId, limit);
-            boolean reachLimited = limit > 2;
+            boolean reachLimited = limit >= 1;
             if (reachLimited) {
                 applicationContext.publishEvent(new QuestionRateLimiterEvent(this, userId));
             }
