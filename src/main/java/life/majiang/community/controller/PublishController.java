@@ -29,6 +29,9 @@ public class PublishController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private QuestionRateLimiter questionRateLimiter;
+
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id") Long id,
                        Model model) {
@@ -56,7 +59,6 @@ public class PublishController {
             @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
             Model model) {
-        log.info("referer:{}", request.getHeader("referer"));
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
@@ -92,7 +94,12 @@ public class PublishController {
             return "publish";
         }
 
-        if (QuestionRateLimiter.reachLimit(user.getId())) {
+        if (user.getDisable() == 1) {
+            model.addAttribute("error", "操作被禁用，如有疑问请联系管理员");
+            return "publish";
+        }
+
+        if (questionRateLimiter.reachLimit(user.getId())) {
             model.addAttribute("error", "操作太快，请求被限制");
             return "publish";
         }

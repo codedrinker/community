@@ -1,0 +1,1 @@
+alter table user add `disable` int(10) null default '0';

@@ -26,6 +26,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private QuestionRateLimiter questionRateLimiter;
+
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
@@ -35,11 +38,15 @@ public class CommentController {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
+        if (user.getDisable() == 1) {
+            return ResultDTO.errorOf(CustomizeErrorCode.USER_DISABLE);
+        }
+
         if (commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())) {
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
         }
 
-        if (QuestionRateLimiter.reachLimit(user.getId())) {
+        if (questionRateLimiter.reachLimit(user.getId())) {
             return ResultDTO.errorOf(CustomizeErrorCode.INVALID_OPERATION);
         }
 
