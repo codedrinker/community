@@ -29,7 +29,7 @@ public class QuestionRateLimiter {
 
     private static Cache<Long, Integer> userLimiter = CacheBuilder.newBuilder()
             .maximumSize(1000)
-            .expireAfterWrite(5, TimeUnit.MINUTES)
+            .expireAfterWrite(1, TimeUnit.MINUTES)
             .removalListener(entity -> log.info("QUESTIONS_RATE_LIMITER_REMOVE:{}", entity.getKey()))
             .build();
 
@@ -37,7 +37,7 @@ public class QuestionRateLimiter {
         try {
             applicationContext.publishEvent(new QuestionRateLimiterEvent(this, userId));
             Integer limit = userLimiter.get(userId, () -> 0);
-            userLimiter.put(userId, limit + 1);
+            userLimiter.put(userId, limit + 2);
             log.info("user : {} post count : {}", userId, limit);
             return limit >= 1;
         } catch (ExecutionException e) {

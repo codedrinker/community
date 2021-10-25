@@ -47,7 +47,7 @@ public class CommentController {
         }
 
         if (questionRateLimiter.reachLimit(user.getId())) {
-            return ResultDTO.errorOf(CustomizeErrorCode.INVALID_OPERATION);
+            return ResultDTO.errorOf(CustomizeErrorCode.RATE_LIMIT);
         }
 
         Comment comment = new Comment();
