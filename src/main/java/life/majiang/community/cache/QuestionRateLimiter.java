@@ -35,11 +35,14 @@ public class QuestionRateLimiter {
 
     public boolean reachLimit(Long userId) {
         try {
-            applicationContext.publishEvent(new QuestionRateLimiterEvent(this, userId));
             Integer limit = userLimiter.get(userId, () -> 0);
-            userLimiter.put(userId, limit + 2);
+            userLimiter.put(userId, limit + 1);
             log.info("user : {} post count : {}", userId, limit);
-            return limit >= 1;
+            boolean isReachLimited = limit >= 2;
+            if (isReachLimited) {
+                applicationContext.publishEvent(new QuestionRateLimiterEvent(this, userId));
+            }
+            return isReachLimited;
         } catch (ExecutionException e) {
             return false;
         }
