@@ -38,7 +38,7 @@ public class QuestionRateLimiterListener implements ApplicationListener<Question
         Integer count = disableUsers.get(event.getUserId(), () -> 0);
         disableUsers.put(event.getUserId(), count + 1);
         log.info("receive rate limit event : {}, count : {}", event.getUserId(), count);
-        if (count >= 60) {
+        if (count >= 10) {
             User user = userMapper.selectByPrimaryKey(event.getUserId());
             if (user != null) {
                 user.setDisable(1);
