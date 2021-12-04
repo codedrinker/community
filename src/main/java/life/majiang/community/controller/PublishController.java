@@ -36,14 +36,13 @@ public class PublishController {
     public String edit(@PathVariable(name = "id") Long id,
                        Model model) {
         QuestionDTO question = questionService.getById(id);
+        model.addAttribute("id", question.getId());
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tag", question.getTag());
-        model.addAttribute("id", question.getId());
         model.addAttribute("tags", TagCache.get());
         return "publish";
     }
-
 
     @GetMapping("/publish")
     public String publish(Model model) {
@@ -53,12 +52,13 @@ public class PublishController {
 
     @PostMapping("/publish")
     public String doPublish(
+            @RequestParam(value = "id", required = false) Long id,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "tag", required = false) String tag,
-            @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
             Model model) {
+        model.addAttribute("id", id);
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
@@ -66,12 +66,14 @@ public class PublishController {
 
         if (StringUtils.isBlank(title)) {
             model.addAttribute("error", "标题不能为空");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         if (StringUtils.length(title) > 50) {
             model.addAttribute("error", "标题最多 50 个字符");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
         if (StringUtils.isBlank(description)) {
             model.addAttribute("error", "问题补充不能为空");
@@ -79,37 +81,42 @@ public class PublishController {
         }
         if (StringUtils.isBlank(tag)) {
             model.addAttribute("error", "标签不能为空");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         String invalid = TagCache.filterInvalid(tag);
         if (StringUtils.isNotBlank(invalid)) {
             model.addAttribute("error", "输入非法标签:" + invalid);
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         if (user.getDisable() == 1) {
             model.addAttribute("error", "操作被禁用，如有疑问请联系管理员");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         if (questionRateLimiter.reachLimit(user.getId())) {
             model.addAttribute("error", "操作太快，请求被限制");
-            return "publish";
+            if (id != null) return edit(id, model);
+            else return publish(model);
         }
 
         Question question = new Question();
+        question.setId(id);
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
         question.setCreator(user.getId());
-        question.setId(id);
         questionService.createOrUpdate(question);
         return "redirect:/";
     }

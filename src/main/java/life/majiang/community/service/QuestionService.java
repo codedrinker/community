@@ -56,8 +56,6 @@ public class QuestionService {
 
         PaginationDTO paginationDTO = new PaginationDTO();
 
-        Integer totalPage;
-
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
         if (StringUtils.isNotBlank(tag)) {
@@ -80,22 +78,12 @@ public class QuestionService {
         }
 
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
-
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-
-        if (page < 1) {
-            page = 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
-        }
+        Integer totalPage = (totalCount - 1) / size + 1;
+        if (page < 1) page = 1;
+        if (page > totalPage) page = totalPage;
+        Integer offset = (page - 1) * size;
 
         paginationDTO.setPagination(totalPage, page);
-        Integer offset = page < 1 ? 0 : size * (page - 1);
         questionQueryDTO.setSize(size);
         questionQueryDTO.setPage(offset);
         List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
@@ -120,30 +108,18 @@ public class QuestionService {
     public PaginationDTO list(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
 
-        Integer totalPage;
-
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria()
                 .andCreatorEqualTo(userId);
+
         Integer totalCount = (int) questionMapper.countByExample(questionExample);
-
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-
-        if (page < 1) {
-            page = 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
-        }
+        Integer totalPage = (totalCount - 1) / size + 1;
+        if (page < 1) page = 1;
+        if (page > totalPage) page = totalPage;
+        Integer offset = (page - 1) * size;
 
         paginationDTO.setPagination(totalPage, page);
-
         //size*(page-1)
-        Integer offset = size * (page - 1);
         QuestionExample example = new QuestionExample();
         example.createCriteria()
                 .andCreatorEqualTo(userId);

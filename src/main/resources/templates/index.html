@@ -56,11 +56,11 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${pagination.showFirstPage}">
-                        <a th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagination.firstPage},search=${search},tag=${tag},sort=${sort})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
-                    <li th:if="${pagination.showPrevious}">
+                    <li th:if="${pagination.showPrevPage}">
                         <a th:href="@{/(page=${pagination.page - 1},search=${search},tag=${tag},sort=${sort})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
@@ -71,14 +71,14 @@
                         <a th:href="@{/(page=${page},search=${search},tag=${tag},sort=${sort})}" th:text="${page}"></a>
                     </li>
 
-                    <li th:if="${pagination.showNext}">
-                        <a th:href="@{/(page=${pagination.page +1 },search=${search},tag=${tag},sort=${sort})}"
+                    <li th:if="${pagination.showNextPage}">
+                        <a th:href="@{/(page=${pagination.page + 1},search=${search},tag=${tag},sort=${sort})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li th:if="${pagination.showEndPage}">
-                        <a th:href="@{/(page=${pagination.totalPage},search=${search},tag=${tag},sort=${sort})}"
+                        <a th:href="@{/(page=${pagination.endPage},search=${search},tag=${tag},sort=${sort})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>

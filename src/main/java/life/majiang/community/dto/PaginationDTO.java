@@ -11,55 +11,42 @@ import java.util.List;
 @Data
 public class PaginationDTO<T> {
     private List<T> data;
-    private boolean showPrevious;
+    private boolean showPrevPage;
     private boolean showFirstPage;
-    private boolean showNext;
+    private boolean showNextPage;
     private boolean showEndPage;
     private Integer page;
+    private Integer firstPage;
+    private Integer endPage;
     private List<Integer> pages = new ArrayList<>();
-    private Integer totalPage;
 
     public void setPagination(Integer totalPage, Integer page) {
-        this.totalPage = totalPage;
+        this.firstPage = 1;
+        this.endPage = totalPage;
         this.page = page;
 
-        pages.add(page);
-        for (int i = 1; i <= 3; i++) {
-            if (page - i > 0) {
-                pages.add(0, page - i);
-            }
+        // 是否显示前一页和后一页
+        showPrevPage = page > 1;
+        showNextPage = page < endPage;
 
-            if (page + i <= totalPage) {
-                pages.add(page + i);
-            }
+        int start = page - 2;
+        int end = page + 2;
+        if (page - 2 < 1) {
+            start = 1;
+            end = Math.min(start + 4, endPage);
+        }
+        if (page + 2 > endPage) {
+            end = endPage;
+            start = Math.max(1, end - 4);
+
         }
 
-        // 是否展示上一页
-        if (page == 1) {
-            showPrevious = false;
-        } else {
-            showPrevious = true;
-        }
+        // 是否显示第一页和最后一页
+        showFirstPage = start > 1;
+        showEndPage = end < endPage;
 
-        // 是否展示下一页
-        if (page == totalPage) {
-            showNext = false;
-        } else {
-            showNext = true;
-        }
-
-        // 是否展示第一页
-        if (pages.contains(1)) {
-            showFirstPage = false;
-        } else {
-            showFirstPage = true;
-        }
-
-        // 是否展示最后一页
-        if (pages.contains(totalPage)) {
-            showEndPage = false;
-        } else {
-            showEndPage = true;
+        for (int i = start; i <= end; i++) {
+            pages.add(i);
         }
     }
 }

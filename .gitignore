@@ -17,6 +17,7 @@ logs/
 *.iws
 *.iml
 *.ipr
+/src/test
 
 ### NetBeans ###
 /nbproject/private/
