@@ -94,7 +94,7 @@ public class PublishController {
             return "publish";
         }
 
-        if (user.getDisable() == 1) {
+        if (user.getDisable() != null && user.getDisable() == 1) {
             model.addAttribute("error", "操作被禁用，如有疑问请联系管理员");
             return "publish";
         }
