@@ -38,7 +38,7 @@ public class CommentController {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
-        if (user.getDisable() == 1) {
+        if (user.getDisable() != null && user.getDisable() == 1) {
             return ResultDTO.errorOf(CustomizeErrorCode.USER_DISABLE);
         }
 
