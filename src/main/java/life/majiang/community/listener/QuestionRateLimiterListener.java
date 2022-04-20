@@ -28,8 +28,8 @@ public class QuestionRateLimiterListener implements ApplicationListener<Question
     private QuestionMapper questionMapper;
 
     private static Cache<Long, Integer> disableUsers = CacheBuilder.newBuilder()
-            .maximumSize(1000)
-            .expireAfterWrite(1, TimeUnit.DAYS)
+            .maximumSize(10)
+            .expireAfterWrite(1, TimeUnit.HOURS)
             .build();
 
     @SneakyThrows
@@ -44,6 +44,15 @@ public class QuestionRateLimiterListener implements ApplicationListener<Question
                 user.setDisable(1);
                 log.info("disable user {}", event.getUserId());
                 userMapper.updateByPrimaryKey(user);
+            }
+            QuestionExample example = new QuestionExample();
+            example.createCriteria().andCreatorEqualTo(event.getUserId());
+            List<Question> questions = questionMapper.selectByExample(example);
+            if (questions != null && questions.size() != 0) {
+                for (Question question : questions) {
+                    log.info("disable user {} and delete posts {}", event.getUserId(), question.getId());
+                    questionMapper.deleteByPrimaryKey(question.getId());
+                }
             }
         }
     }
