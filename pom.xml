@@ -29,6 +29,15 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+        <profile>
+            <id>mysql</id>
+            <properties>
+                <db.url>jdbc:mysql://127.0.0.1:3306/</db.url>
+                <db.user>root</db.user>
+                <db.password>root</db.password>
+                <db.driver>com.mysql.jdbc.Driver</db.driver>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -110,6 +119,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -120,7 +135,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>${db.url}</url>
+                    <url>${db.url}community</url>
                     <user>${db.user}</user>
                     <password>${db.password}</password>
                 </configuration>
@@ -141,11 +156,20 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.7</version>
+                <configuration>
+                    <overwrite>true</overwrite>
+                    <configurationFile>${basedir}/target/classes/generatorConfig.xml</configurationFile>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
                         <version>1.4.199</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.45</version>
                     </dependency>
                 </dependencies>
             </plugin>
